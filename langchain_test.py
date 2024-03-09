@@ -98,6 +98,7 @@ pdf_file= f"{github_repo_url}/{pdf_file_path}"
 question = st.text_input("Enter Question")
 
 if st.button("Get Answer"):
+	time.sleep(10)
 	text = get_pdf_text(pdf_file)
 	chunks=get_text_chunks(text)
 #print (len(chunks))
