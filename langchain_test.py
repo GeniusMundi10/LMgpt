@@ -17,7 +17,7 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 #claudeai_key = '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'
 model=ChatOpenAI(openai_api_key=OPENAI_API_KEY,model="gpt-3.5-turbo")
-
+https://github.com/GeniusMundi10/LMgpt/blob/main/LM_PCR_All_Amendements.pdf
 
 parser = StrOutputParser()
 
@@ -70,7 +70,7 @@ def get_vectorstore(text_chunks):
 
 #home_directory = os.path.expanduser("~")
 #pdf_file = os.path.join(home_directory,"Downloads","LM_PCR_All_Amendements.pdf")
-github_repo_url = "https://github.com/GeniusMundi10/LMgpt/main"
+github_repo_url = "ttps://raw.githubusercontent.com/GeniusMundi10/LMgpt/main"
 
 # PDF file path within the repository
 pdf_file_path = "LM_PCR_All_Amendements.pdf"
