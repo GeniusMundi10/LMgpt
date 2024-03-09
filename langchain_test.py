@@ -47,7 +47,7 @@ def get_pdf_text(pdf_url):
 	response = requests.get(pdf_url)
 	if response.status_code == 200:
 		pdf_content = BytesIO(response.content)
-		pdf_reader = PDFReader(pdf_content)
+		pdf_reader = PdfReader(pdf_content)
 		text = ""
 		pdf_reader = PdfReader(pdf)
 		for page in pdf_reader.pages:
