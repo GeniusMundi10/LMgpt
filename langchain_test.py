@@ -12,9 +12,10 @@ from langchain.vectorstores import Chroma,FAISS,DocArrayInMemorySearch
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 import streamlit as st
 #load_dotenv
+load_dotenv()
 
-OPENAI_API_KEY = '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'
-claudeai_key = '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'
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+#claudeai_key = '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'
 model=ChatOpenAI(openai_api_key=OPENAI_API_KEY,model="gpt-3.5-turbo")
 #print(model)
 #answer=model.invoke("Who will win the  elections in India")
