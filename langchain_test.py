@@ -63,7 +63,13 @@ def get_vectorstore(text_chunks):
 
 #home_directory = os.path.expanduser("~")
 #pdf_file = os.path.join(home_directory,"Downloads","LM_PCR_All_Amendements.pdf")
-pdf_file = "https://github.com/GeniusMundi10/LMgpt/main/LM_PCR_All_Amendments.pdf"
+github_repo_url = "https://raw.githubusercontent.com/GeniusMundi10/LMgpt/main"
+
+# PDF file path within the repository
+pdf_file_path = "LM_PCR_All_Amendements.pdf"
+
+# Combine GitHub URL and PDF file path to get the raw content URL
+pdf_file= f"{github_repo_url}/{pdf_file_path}"
 #print(pdf_file)
 
 #print(text)
