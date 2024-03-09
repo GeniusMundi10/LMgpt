@@ -61,8 +61,9 @@ def get_vectorstore(text_chunks):
 	vector_store = DocArrayInMemorySearch.from_texts(text_chunks,embeddings)
 	return vector_store
 
-home_directory = os.path.expanduser("~")
-pdf_file = os.path.join(home_directory,"Downloads","LM_PCR_All_Amendements.pdf")
+#home_directory = os.path.expanduser("~")
+#pdf_file = os.path.join(home_directory,"Downloads","LM_PCR_All_Amendements.pdf")
+pdf_file = "https://github.com/GeniusMundi10/LMgpt/main/LM_PCR_All_Amendments.pdf"
 #print(pdf_file)
 
 #print(text)
