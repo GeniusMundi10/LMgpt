@@ -43,18 +43,18 @@ ans=chain.invoke({"context":"LangChain is a framework designed to simplify the p
 
 
 def get_pdf_text(pdf_url):
-    response = requests.get(pdf_url)
-    if response.status_code == 200:
-	pdf_content = BytesIO(response.content)
-	pdf_reader = PDFReader(pdf_content)
-    	text = ""
+	response = requests.get(pdf_url)
+	if response.status_code == 200:
+		pdf_content = BytesIO(response.content)
+		pdf_reader = PDFReader(pdf_content)
+    		text = ""
     
-    	pdf_reader = PdfReader(pdf)
-    	for page in pdf_reader.pages:
-        	text += page.extract_text()
-    	return text
-    else:
-	raise Exception(f"Failed to fetch PDF content. Status code:{response.status_code}")
+    		pdf_reader = PdfReader(pdf)
+    		for page in pdf_reader.pages:
+        		text += page.extract_text()
+    		return text
+	else:
+		raise Exception(f"Failed to fetch PDF content. Status code:{response.status_code}")
 
 
 
