@@ -11,6 +11,7 @@ from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma,FAISS,DocArrayInMemorySearch
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 import streamlit as st
+from io import BytesIO
 #load_dotenv
 load_dotenv()
 
