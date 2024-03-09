@@ -1,6 +1,6 @@
 
 import os
-#from dotenv() import load_dotenv
+from dotenv import load_dotenv
 from langchain_openai.chat_models import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate,MessagesPlaceholder
@@ -17,15 +17,12 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 #claudeai_key = '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'
 model=ChatOpenAI(openai_api_key=OPENAI_API_KEY,model="gpt-3.5-turbo")
-#print(model)
-#answer=model.invoke("Who will win the  elections in India")
-#print(answer)
+
 
 parser = StrOutputParser()
 
 chain = model | parser
-#answer=chain.invoke("What cricket team won the icc cricket world cup 2023 last year?")
-#print(answer)
+
 st.title("ELT LM GPT")
 
 template = """
@@ -53,11 +50,21 @@ def get_pdf_text(pdf):
         text += page.extract_text()
     return text
 
+def get_text_chunks(text):
+	text_splitter = CharacterTextSplitter(separator="\n",chunk_size=1000,chunk_overlap=200,length_function=len)
+	chunks = text_splitter.split_text(text)
+	return chunks
+
+def get_vectorstore(text_chunks):
+	embeddings=OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+	#vectorstore = FAISS.from_texts(texts=text_chunks,embedding=embeddings)
+	vector_store = DocArrayInMemorySearch.from_texts(text_chunks,embeddings)
+	return vector_store
 
 home_directory = os.path.expanduser("~")
 pdf_file = os.path.join(home_directory,"Downloads","LM_PCR_All_Amendements.pdf")
 #print(pdf_file)
-text = get_pdf_text(pdf_file)
+
 #print(text)
 
 #try:
@@ -72,16 +79,7 @@ text = get_pdf_text(pdf_file)
 
 
 
-def get_text_chunks(text):
-	text_splitter = CharacterTextSplitter(separator="\n",chunk_size=1000,chunk_overlap=200,length_function=len)
-	chunks = text_splitter.split_text(text)
-	return chunks
 
-def get_vectorstore(text_chunks):
-	embeddings=OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-	#vectorstore = FAISS.from_texts(texts=text_chunks,embedding=embeddings)
-	vector_store = DocArrayInMemorySearch.from_texts(text_chunks,embeddings)
-	return vector_store
 
 question = st.text_input("Enter Question")
 
