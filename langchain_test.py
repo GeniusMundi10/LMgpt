@@ -8,7 +8,7 @@ from PyPDF2 import PdfReader
 from langchain_community.document_loaders import TextLoader,PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter,CharacterTextSplitter
 from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import Chroma,FAISS,DocArrayInMemorySearch
+from langchain-community.vectorstores import Chroma,FAISS,DocArrayInMemorySearch
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 import streamlit as st
 from io import BytesIO
@@ -109,7 +109,7 @@ if st.button("Get Answer"):
 	query = "Summarize the key points from the PDF"
 #a=retriever.invoke(query)
 #print(a)
-	docs=vector_store.similarity_search(query)
+	#docs=vector_store.similarity_search(query)
 #a=chain.invoke({
 #	"context":docs,
 #	"question" : query
