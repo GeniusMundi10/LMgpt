@@ -38,7 +38,7 @@ prompt = ChatPromptTemplate.from_template(template)
 prompt.format(context = "Jatin has three girlfriends.",question="How many  girlfriends does jatin have?")
 #print(a)
 chain = prompt | model | parser
-ans=chain.invoke({"context":"LangChain is a framework designed to simplify the process of building applications that leverage large language models (LLMs).  Imagine building applications like chatbots or virtual assistants without needing to be an expert in complex LLM interactions. LangChain provides a toolbox of components and functionalities like data retrieval and reasoning, allowing developers to chain these elements together to create intelligent applications. This not only streamlines development but also empowers those less familiar with LLMs to experiment and prototype LLM-powered applications.","question":"Can you elaborate about this paragraph in detail"})
+#ans=chain.invoke({"context":"LangChain is a framework designed to simplify the process of building applications that leverage large language models (LLMs).  Imagine building applications like chatbots or virtual assistants without needing to be an expert in complex LLM interactions. LangChain provides a toolbox of components and functionalities like data retrieval and reasoning, allowing developers to chain these elements together to create intelligent applications. This not only streamlines development but also empowers those less familiar with LLMs to experiment and prototype LLM-powered applications.","question":"Can you elaborate about this paragraph in detail"})
 #print(ans)
 
 
@@ -98,7 +98,7 @@ pdf_file= f"{github_repo_url}/{pdf_file_path}"
 question = st.text_input("Enter Question")
 
 if st.button("Get Answer"):
-	time.sleep(1)
+	time.sleep(10)
 	text = get_pdf_text(pdf_file)
 	chunks=get_text_chunks(text)
 #print (len(chunks))
