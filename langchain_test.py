@@ -27,7 +27,7 @@ chain = model | parser
 st.title("ELT LM GPT")
 
 template = """
-Answer the question based on the context below. If you can't answer the question reply "I dont Know". Keep the answer lengthy.
+You are an assistant for question-answering tasks. Answer the question based on the context below. If you can't answer the question reply "I dont Know". Keep the answer lengthy and in detail.
 
 Context:{context}
 
@@ -64,8 +64,8 @@ def get_text_chunks(text):
 
 def get_vectorstore(text_chunks):
 	embeddings=OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-	#vectorstore = FAISS.from_texts(texts=text_chunks,embedding=embeddings)
-	vector_store = DocArrayInMemorySearch.from_texts(text_chunks,embeddings)
+	vectorstore = FAISS.from_texts(texts=text_chunks,embedding=embeddings)
+	#vector_store = DocArrayInMemorySearch.from_texts(text_chunks,embeddings)
 	return vector_store
 def format_docs(docs):
 	return "\n\n".join(doc.page_content for doc in docs)
