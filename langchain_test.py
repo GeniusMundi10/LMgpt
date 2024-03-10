@@ -67,7 +67,8 @@ def get_vectorstore(text_chunks):
 	#vectorstore = FAISS.from_texts(texts=text_chunks,embedding=embeddings)
 	vector_store = DocArrayInMemorySearch.from_texts(text_chunks,embeddings)
 	return vector_store
-
+def format_docs(docs):
+	return "\n\n".join(doc.page_content for doc in docs)
 #home_directory = os.path.expanduser("~")
 #pdf_file = os.path.join(home_directory,"Downloads","LM_PCR_All_Amendements.pdf")
 github_repo_url = "https://raw.githubusercontent.com/GeniusMundi10/LMgpt/main"
@@ -115,7 +116,7 @@ if st.button("Get Answer"):
 #	"question" : query
 #	})
 #print(a)
-	setup = RunnableParallel(context = retriever, question=RunnablePassthrough())
+	setup = RunnableParallel(context = retriever | format_docs, question=RunnablePassthrough())
 #a=setup.invoke("WHat are the amendments number?")
 #print(a)
 
