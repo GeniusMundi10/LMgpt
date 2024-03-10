@@ -1,4 +1,4 @@
-import requests
+plainimport requests
 import os
 from dotenv import load_dotenv
 from langchain_openai.chat_models import ChatOpenAI
@@ -27,7 +27,7 @@ chain = model | parser
 st.title("ELT LM GPT")
 
 template = """
-Answer the question based on the context below. If you can't answer the question reply "I dont Know".
+Answer the question based on the context below. If you can't answer the question reply "I dont Know".Explain the answer as a lawyer and in complete details.
 
 Context:{context}
 
