@@ -27,7 +27,7 @@ chain = model | parser
 st.title("ELT LM GPT")
 
 template = """
-Answer the question based on the context below. If you can't answer the question reply "I dont Know". Keep the answer as detailed as possible.
+Answer the question based on the context below. If you can't answer the question reply "I dont Know". Keep the answer in discursive.
 
 Context:{context}
 
