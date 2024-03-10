@@ -1,4 +1,4 @@
-plainimport requests
+import requests
 import os
 from dotenv import load_dotenv
 from langchain_openai.chat_models import ChatOpenAI
