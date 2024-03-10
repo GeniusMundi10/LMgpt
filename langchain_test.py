@@ -8,7 +8,7 @@ from PyPDF2 import PdfReader
 from langchain_community.document_loaders import TextLoader,PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter,CharacterTextSplitter
 from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain-community.vectorstores import Chroma,FAISS,DocArrayInMemorySearch
+from langchain_community.vectorstores import Chroma,FAISS,DocArrayInMemorySearch
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 import streamlit as st
 from io import BytesIO
