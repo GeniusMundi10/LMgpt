@@ -27,7 +27,7 @@ chain = model | parser
 st.title("ELT LM GPT")
 
 template = """
-Answer the question based on the context below. If you can't answer the question reply "I dont Know".Explain the answer as a lawyer to a client and in a very detailed and professional manner.
+Answer the question based on the context below. If you can't answer the question reply "I dont Know". Keep the answer as long as possible.
 
 Context:{context}
 
