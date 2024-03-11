@@ -6,6 +6,8 @@ python-dotenv
 langchain
 langchain-openai
 langchain-community
+langchain-pinecone
+pinecone-client
 langchain[docarray]
 docarray
 pydantic==1.10.8
