@@ -11,6 +11,7 @@ from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma,FAISS,DocArrayInMemorySearch
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 import streamlit as st
+from langchain_pinecone import PineconeVectorStore
 from io import BytesIO
 #load_dotenv
 load_dotenv()
@@ -64,9 +65,9 @@ def get_text_chunks(text):
 
 def get_vectorstore(text_chunks):
 	embeddings=OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-	vector_store = FAISS.from_texts(texts=text_chunks,embedding=embeddings)
+	#vector_store = FAISS.from_texts(texts=text_chunks,embedding=embeddings)
 	#vector_store = DocArrayInMemorySearch.from_texts(text_chunks,embeddings)
-	return vector_store
+	return embeddings
 def format_docs(docs):
 	return "\n\n".join(doc.page_content for doc in docs)
 #home_directory = os.path.expanduser("~")
@@ -105,9 +106,11 @@ if st.button("Get Answer"):
 #print (len(chunks))
 	vector_store=get_vectorstore(chunks)
 
-	retriever=vector_store.as_retriever()
-
-	query = "Summarize the key points from the PDF"
+	#retriever=vector_store.as_retriever()
+	index_name = "LMGPT"
+	pinecone = PineconeVectorStore.from_documents(chunks,vector_store,index_name=index_name)
+	retriever = pinecone.as_retriever()
+	#query = "Summarize the key points from the PDF"
 #a=retriever.invoke(query)
 #print(a)
 	#docs=vector_store.similarity_search(query)
