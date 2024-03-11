@@ -14,3 +14,4 @@ pydantic==1.10.8
 PyPDF2
 tiktoken
 openai
+faiss-cpu
