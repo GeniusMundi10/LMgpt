@@ -64,7 +64,7 @@ def get_text_chunks(text):
 
 def get_vectorstore(text_chunks):
 	embeddings=OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-	vectorstore = FAISS.from_texts(texts=text_chunks,embedding=embeddings)
+	vector_store = FAISS.from_texts(texts=text_chunks,embedding=embeddings)
 	#vector_store = DocArrayInMemorySearch.from_texts(text_chunks,embeddings)
 	return vector_store
 def format_docs(docs):
