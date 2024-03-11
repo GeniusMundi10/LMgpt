@@ -10,3 +10,4 @@ langchain[docarray]
 docarray
 pydantic==1.10.8
 PyPDF2
+faiss-cpu
