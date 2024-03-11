@@ -6,7 +6,7 @@ python-dotenv
 langchain
 langchain-openai
 langchain-community
-langchain-pinecone
+langchain_pinecone
 pinecone-client
 langchain[docarray]
 docarray
