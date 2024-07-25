@@ -80,7 +80,8 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = []	
 
 
-question = st.text_input("Enter Question", key="input")
+st.markdown("<h3 style='text-align: center;'>Ask a Question</h3>", unsafe_allow_html=True)
+question = st.text_input("", key="input")
 
 if st.button("Get Answer"):
     text = get_pdf_text(pdf_file)
@@ -115,10 +116,10 @@ if st.button("Get Answer"):
         # Add assistant response to chat history
         st.session_state.chat_history.append({"role": "assistant", "content": complete_answer})
 
-# Display chat history
-st.subheader("Chat History")
+# Display chat history in a better layout
+st.markdown("<h3 style='text-align: center;'>Chat History</h3>", unsafe_allow_html=True)
 for message in st.session_state.chat_history:
     if message["role"] == "user":
-        st.markdown(f"**You:** {message['content']}")
+        st.markdown(f"<div style='background-color: #444; padding: 10px; border-radius: 10px;'><b>You:</b> {message['content']}</div>", unsafe_allow_html=True)
     else:
-        st.markdown(f"**Assistant:** {message['content']}")
+        st.markdown(f"<div style='background-color: #666; padding: 10px; border-radius: 10px;'><b>Assistant:</b> {message['content']}</div>", unsafe_allow_html=True)
