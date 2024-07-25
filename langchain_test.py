@@ -80,7 +80,7 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = []	
 
 
-st.markdown("<h3 style='text-align: center;'>Ask a Question</h3>", unsafe_allow_html=True)
+st.markdown("<h3 class='centered'>Ask a Question</h3>", unsafe_allow_html=True)
 question = st.text_input("", key="input")
 
 if st.button("Get Answer"):
@@ -117,9 +117,12 @@ if st.button("Get Answer"):
         st.session_state.chat_history.append({"role": "assistant", "content": complete_answer})
 
 # Display chat history in a better layout
-st.markdown("<h3 style='text-align: center;'>Chat History</h3>", unsafe_allow_html=True)
-for message in st.session_state.chat_history:
-    if message["role"] == "user":
-        st.markdown(f"<div style='background-color: #444; padding: 10px; border-radius: 10px;'><b>You:</b> {message['content']}</div>", unsafe_allow_html=True)
-    else:
-        st.markdown(f"<div style='background-color: #666; padding: 10px; border-radius: 10px;'><b>Assistant:</b> {message['content']}</div>", unsafe_allow_html=True)
+st.markdown("<h3 class='centered'>Chat History</h3>", unsafe_allow_html=True)
+chat_container = st.container()
+
+with chat_container:
+    for message in st.session_state.chat_history:
+        if message["role"] == "user":
+            st.markdown(f"<div class='chat-bubble user'><b>You:</b> {message['content']}</div>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<div class='chat-bubble assistant'><b>Assistant:</b> {message['content']}</div>", unsafe_allow_html=True)
