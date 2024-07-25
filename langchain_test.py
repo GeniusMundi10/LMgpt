@@ -11,7 +11,6 @@ from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma,FAISS,DocArrayInMemorySearch
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 import streamlit as st
-from langchain_pinecone import PineconeVectorStore
 from io import BytesIO
 #load_dotenv
 load_dotenv()
@@ -74,22 +73,11 @@ pdf_file_path = "LM_PCR_All_Amendements.pdf"
 
 # Combine GitHub URL and PDF file path to get the raw content URL
 pdf_file= f"{github_repo_url}/{pdf_file_path}"
-#print(pdf_file)
-
-#print(text)
-
-#try:
-#	chain.invoke({
-#		"context": text,
-#		"question": "What are the  Legal Metrology amendments. "
-#		})
-#except Exception as e:
-#	print(e)	
 
 
 
-
-
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []	
 
 
 question = st.text_input("Enter Question")
@@ -121,3 +109,13 @@ if st.button("Get Answer"):
             if chunk:
                 complete_answer += chunk
                 response_placeholder.markdown(complete_answer)
+
+	st.session_state.chat_history.append({"role": "assistant", "content": complete_answer})
+
+
+st.subheader("Chat History")
+for message in st.session_state.chat_history:
+    if message["role"] == "user":
+        st.markdown(f"**You:** {message['content']}")
+    else:
+        st.markdown(f"**Assistant:** {message['content']}")
