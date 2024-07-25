@@ -120,4 +120,4 @@ if st.button("Get Answer"):
         for chunk in chain.stream(question):
             if chunk:
                 complete_answer += chunk
-                response_placeholder.text(complete_answer)
+                response_placeholder.markdown(complete_answer)
