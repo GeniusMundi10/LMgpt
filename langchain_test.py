@@ -19,7 +19,6 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 #claudeai_key = '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'
 model=ChatOpenAI(openai_api_key=OPENAI_API_KEY,model="gpt-3.5-turbo",streaming=True,max_tokens=4096)
 
-
 st.set_page_config(page_title="ELT LM GPT", page_icon="🤖", layout="wide")
 
 st.markdown("""
@@ -29,20 +28,22 @@ st.markdown("""
     }
     .chat-bubble {
         margin: 10px 0;
-        padding: 10px;
+        padding: 15px;
         border-radius: 10px;
         max-width: 80%;
         word-wrap: break-word;
     }
     .chat-bubble.user {
-        background-color: #1f77b4;
-        color: white;
+        background-color: #333333;
+        color: #ffffff;
         align-self: flex-end;
+        border: 1px solid #4CAF50;
     }
     .chat-bubble.assistant {
-        background-color: #d62728;
-        color: white;
+        background-color: #444444;
+        color: #ffffff;
         align-self: flex-start;
+        border: 1px solid #FF9800;
     }
     .container {
         display: flex;
