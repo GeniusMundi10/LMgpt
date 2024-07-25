@@ -95,32 +95,29 @@ pdf_file= f"{github_repo_url}/{pdf_file_path}"
 question = st.text_input("Enter Question")
 
 if st.button("Get Answer"):
-	#time.sleep(10)
-	text = get_pdf_text(pdf_file)
-	chunks=get_text_chunks(text)
-#print (len(chunks))
-	vector_store=get_vectorstore(chunks)
+    text = get_pdf_text(pdf_file)
+    if text:
+        chunks = get_text_chunks(text)
+        vector_store = get_vectorstore(chunks)
+        retriever = vector_store.as_retriever()
 
-	retriever=vector_store.as_retriever()
-	#index_name = "LMGPT"
-	#pinecone = PineconeVectorStore.from_documents(chunks,vector_store,index_name=index_name)
-	#retriever = pinecone.as_retriever()
-	#query = "Summarize the key points from the PDF"
-#a=retriever.invoke(query)
-#print(a)
-	#docs=vector_store.similarity_search(query)
-#a=chain.invoke({
-#	"context":docs,
-#	"question" : query
-#	})
-#print(a)
-	setup = RunnableParallel(context = retriever | format_docs, question=RunnablePassthrough())
-#a=setup.invoke("WHat are the amendments number?")
-#print(a)
+        # Retrieve relevant context
+        relevant_docs = retriever.get_relevant_documents(question)
+        context = format_docs(relevant_docs)
 
-	chain = setup | prompt | model | parser
-	#answer=chain.invoke(question)
-	st.header("Answer:")
-	for chunk in chain.stream(question):
-	#st.header("Answer:")
-		st.write(chunk, end="", flush=True)
+        # Prepare the full prompt
+        prompt_text = template.format(context=context, question=question)
+
+        # Set up the runnable pipeline for streaming response
+        setup = RunnableParallel(context=retriever | format_docs, question=RunnablePassthrough())
+        chain = setup | prompt | model | parser
+
+        st.header("Answer:")
+        response_placeholder = st.empty()  # Placeholder for streaming response
+        complete_answer = ""
+
+        # Invoke the chain with streaming
+        for chunk in chain.stream(question):
+            if chunk:
+                complete_answer += chunk
+                response_placeholder.text(complete_answer)
