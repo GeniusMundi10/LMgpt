@@ -20,11 +20,40 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 model=ChatOpenAI(openai_api_key=OPENAI_API_KEY,model="gpt-3.5-turbo",streaming=True,max_tokens=4096)
 
 
-parser = StrOutputParser()
+st.set_page_config(page_title="ELT LM GPT", page_icon="🤖", layout="wide")
 
-chain = model | parser
+st.markdown("""
+    <style>
+    .main {
+        background-color: #f0f0f5;
+    }
+    .chat-bubble {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 80%;
+        word-wrap: break-word;
+    }
+    .chat-bubble.user {
+        background-color: #d1e7dd;
+        align-self: flex-end;
+    }
+    .chat-bubble.assistant {
+        background-color: #ffe8a1;
+        align-self: flex-start;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+    .centered {
+        text-align: center;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-st.title("ELT LM GPT")
+st.markdown("<h1 class='centered'>ELT LM GPT</h1>", unsafe_allow_html=True)
+
 
 template = """
 You are an assistant for question-answering tasks in detail. Answer the question based on the context below. If you can't answer the question reply "I dont Know". Keep the answer lengthy and informative.
