@@ -36,7 +36,7 @@ Question:{question}
 """
 
 
-
+prompt = ChatPromptTemplate.from_template(template)
 
 
 def get_pdf_text(pdf_url):
