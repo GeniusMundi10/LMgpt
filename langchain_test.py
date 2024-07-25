@@ -121,6 +121,6 @@ if st.button("Get Answer"):
 	chain = setup | prompt | model | parser
 	#answer=chain.invoke(question)
 	st.header("Answer:")
-	for chunk in chain.stream(question
+	for chunk in chain.stream(question):
 	#st.header("Answer:")
 		st.write(chunk, end="", flush=True)
