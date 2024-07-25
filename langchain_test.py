@@ -80,7 +80,7 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = []	
 
 
-question = st.text_input("Enter Question")
+question = st.text_input("Enter Question", key="input")
 
 if st.button("Get Answer"):
     text = get_pdf_text(pdf_file)
@@ -100,7 +100,9 @@ if st.button("Get Answer"):
         setup = RunnableParallel(context=retriever | format_docs, question=RunnablePassthrough())
         chain = setup | prompt | model | parser
 
-        st.header("Answer:")
+        # Add user question to chat history
+        st.session_state.chat_history.append({"role": "user", "content": question})
+
         response_placeholder = st.empty()  # Placeholder for streaming response
         complete_answer = ""
 
@@ -110,9 +112,10 @@ if st.button("Get Answer"):
                 complete_answer += chunk
                 response_placeholder.markdown(complete_answer)
 
-	st.session_state.chat_history.append({"role": "assistant", "content": complete_answer})
+        # Add assistant response to chat history
+        st.session_state.chat_history.append({"role": "assistant", "content": complete_answer})
 
-
+# Display chat history
 st.subheader("Chat History")
 for message in st.session_state.chat_history:
     if message["role"] == "user":
