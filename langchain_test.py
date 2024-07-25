@@ -25,7 +25,7 @@ st.set_page_config(page_title="ELT LM GPT", page_icon="🤖", layout="wide")
 st.markdown("""
     <style>
     .main {
-        background-color: #f0f0f5;
+        background-color: #000000;
     }
     .chat-bubble {
         margin: 10px 0;
@@ -35,11 +35,13 @@ st.markdown("""
         word-wrap: break-word;
     }
     .chat-bubble.user {
-        background-color: #d1e7dd;
+        background-color: #1f77b4;
+        color: white;
         align-self: flex-end;
     }
     .chat-bubble.assistant {
-        background-color: #ffe8a1;
+        background-color: #d62728;
+        color: white;
         align-self: flex-start;
     }
     .container {
@@ -49,12 +51,13 @@ st.markdown("""
     .centered {
         text-align: center;
     }
+    h1, h3 {
+        color: white;
+    }
     </style>
 """, unsafe_allow_html=True)
 
 st.markdown("<h1 class='centered'>ELT LM GPT</h1>", unsafe_allow_html=True)
-
-
 template = """
 You are an assistant for question-answering tasks in detail. Answer the question based on the context below. If you can't answer the question reply "I dont Know". Keep the answer lengthy and informative.
 
